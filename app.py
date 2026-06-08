@@ -183,23 +183,34 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+# ── AUTO LOAD API KEY FROM SECRETS ──────────────────────────────────────────
+try:
+    api_key = st.secrets["GROQ_API_KEY"]
+    key_from_secret = True
+except:
+    api_key = None
+    key_from_secret = False
+
 # ── SIDEBAR ───────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("## ⚙️ Setup")
-    st.markdown("**Step 1:** Get your free API key")
-    st.markdown("[🔑 Get Free Groq API Key](https://console.groq.com/keys)")
-    st.markdown("Sign up → Create API Key → Copy it")
-    st.divider()
+    st.markdown("## ⚙️ ResumeIQ")
 
-    api_key = st.text_input(
-        "Paste your Groq API Key here",
-        type="password",
-        placeholder="gsk_...",
-        help="Free at console.groq.com/keys — no credit card needed"
-    )
+    if not key_from_secret:
+        st.markdown("**API Key Required**")
+        st.markdown("[🔑 Get Free Groq Key](https://console.groq.com/keys)")
+        st.divider()
+        api_key = st.text_input(
+            "Paste your Groq API Key",
+            type="password",
+            placeholder="gsk_...",
+            help="Free at console.groq.com/keys"
+        )
+        st.divider()
+    else:
+        st.success("✓ App ready to use!")
+        st.divider()
 
-    st.divider()
-    st.markdown("**Step 2:** Paste job description (optional)")
+    st.markdown("**Job Description (optional)**")
     job_desc = st.text_area(
         "Job Description",
         placeholder="Paste the job listing here to get a match score...",
