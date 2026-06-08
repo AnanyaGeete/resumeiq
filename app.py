@@ -6,21 +6,27 @@ from parser import extract_text
 st.set_page_config(
     page_title="ResumeIQ — AI Resume Analyser",
     page_icon="💗",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    layout="centered",
+    initial_sidebar_state="collapsed"
 )
 
 # ── PINK THEME CSS ────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap');
-
 /* ── BASE ── */
 html, body, [class*="css"] {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Georgia', serif;
     background-color: #fff0f5 !important;
 }
-h1,h2,h3 { font-family: 'Playfair Display', serif !important; }
+h1,h2,h3 { font-family: 'Georgia', serif !important; }
+
+/* ── MOBILE FRIENDLY ── */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2rem !important; }
+    .hero { padding: 1.5rem !important; }
+    .score-num { font-size: 1.8rem !important; }
+    .block-container { padding: 1rem !important; }
+}
 
 /* ── SIDEBAR ── */
 [data-testid="stSidebar"] {
